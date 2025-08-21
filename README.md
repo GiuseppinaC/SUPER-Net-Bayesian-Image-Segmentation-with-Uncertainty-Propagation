@@ -9,21 +9,23 @@ This repository contains the implementation and pretrained models for **SUPER-Ne
 ---
 
 ## Repository Structure
+```sh
 
-SUPER U-Net
-│
+
+
 ├── brats.py # Main script for the BraTS dataset
 ├── hippocampus.py # Main script for the Hippocampus dataset
 ├── lungs.py # Main script for the Lungs dataset
-│
+
 ├── brats_functions.py # Helper functions for BraTS (plots, metrics, preprocessing)
 ├── hippocampus_functions.py
 ├── lungs_functions.py
-│
+
 ├── models/ # Folder containing pretrained models
-│ ├── brats_model
-│ ├── hippocampus_model
-│ └── lungs_model
-│
+   ├── brats_model
+   ├── hippocampus_model
+   └── lungs_model
+
 ├── requirements.txt # Python dependencies
 └── README.md # This file
+```
