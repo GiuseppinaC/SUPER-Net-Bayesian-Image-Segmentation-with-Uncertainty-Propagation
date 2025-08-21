@@ -29,3 +29,54 @@ This repository contains the implementation and pretrained models for **SUPER-Ne
 ├── requirements.txt # Python dependencies
 └── README.md # This file
 ```
+
+
+## Requirements
+
+Install all required python dependencies:
+
+```sh
+pip install -r requirements.txt
+```
+
+## Running Models
+By default, you may need to update the data path, results path in each script:
+
+In brats.py, modify line XX to point to your BraTS dataset folder.
+
+In hippocampus.py, modify line YY.
+
+In lungs.py, modify line ZZ.
+
+(We will provide comments in each file to indicate where these changes are needed.)
+
+**Training:**
+
+If Training only:
+
+
+```sh
+python Brats.py 
+```
+(Similarly for the other datasets: hippocampus.py, lungs.py).
+**Testing - Clean Test Data & Noisy Data:**
+
+If Testing (with default options):
+
+
+```sh
+python Brats.py (change lines ...)
+```
+
+
+
+**Testing - Adversarial Attacks:**
+
+When Testing with added Gaussian noise, we need to specify the level of noise (variance) :
+
+
+
+When Testing with added Adversarial (FGSM) attacks, we need to specify:
+- the level of the attack (epsilon)
+- if targeted or not (default is untargeted)
+- the fooling class (for targeted attacks)
