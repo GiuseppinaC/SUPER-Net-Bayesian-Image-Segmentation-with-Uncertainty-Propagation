@@ -640,7 +640,7 @@ def main_function(n_kernels=32, output_channels = 3, batch_size=20, epochs = 120
                 if step % 20 == 0:
                     print("\n Step:", step, "Loss:" , float(err1/(tr_no_steps + 1.)))
                     print("Total Training accuracy so far: %.3f" % float(acc1/(tr_no_steps + 1.)), 
-                     " - New Dice Coefficients:" , float(d1/(tr_no_steps + 1.)),  float(d2/(tr_no_steps + 1.))
+                     " -  Dice Coefficients:" , float(d1/(tr_no_steps + 1.)),  float(d2/(tr_no_steps + 1.))
                      , " - Hausdorf Coefficients:" , float(h1/(tr_no_steps + 1.)),  float(h2/(tr_no_steps + 1.)))
                     
                            
@@ -659,7 +659,7 @@ def main_function(n_kernels=32, output_channels = 3, batch_size=20, epochs = 120
      
             
             
-            print('Training new dice scores  ', train_dice1[epoch], train_dice2[epoch])
+            print('Training  dice scores  ', train_dice1[epoch], train_dice2[epoch])
             print('Training Hausdorff scores  ', train_hus1[epoch], train_hus2[epoch])
 
             UNET_model.save_weights(PATH + 'vdp_UNET_model.weights.h5')                  
@@ -704,7 +704,7 @@ def main_function(n_kernels=32, output_channels = 3, batch_size=20, epochs = 120
                 if step % 8 == 0:                   
                     print("Step:", step, "Loss:", float(total_vloss))
                     print("Total validation accuracy so far: %.3f" % float(acc1/(va_no_steps+ 1.)), 
-                     " - New Dice Coefficients:" , float(val_d1/(va_no_steps+ 1.)),  float(val_d2/(va_no_steps + 1.))
+                     " -  Dice Coefficients:" , float(val_d1/(va_no_steps+ 1.)),  float(val_d2/(va_no_steps + 1.))
                      , " - Hausdorf Coefficients:" , float(val_h1/(va_no_steps + 1.)),  float(val_h2/(va_no_steps + 1.)))
                     
                 va_no_steps+=1
@@ -733,10 +733,10 @@ def main_function(n_kernels=32, output_channels = 3, batch_size=20, epochs = 120
             print('------------------------------------')
             
             print('------------------------------------')
-            print('train dice scores Tumor/Core/Enhancing', train_dice1[epoch],  train_dice2[epoch])
+            print('train dice scores Anterior/Posterior', train_dice1[epoch],  train_dice2[epoch])
             print('Validation dice', val_dice1[epoch], val_dice2[epoch]) 
             print('------------------------------------')
-            print('train Hausdorff scores Tumor/Core/Enhancing', train_hus1[epoch],  train_hus2[epoch])
+            print('train Hausdorff scores Anterior/Posterior', train_hus1[epoch],  train_hus2[epoch])
             print('Validation H. scores', val_hus1[epoch], val_hus2[epoch])
      
         #-----------------End Training--------------------------             
@@ -911,7 +911,7 @@ def main_function(n_kernels=32, output_channels = 3, batch_size=20, epochs = 120
             #this part commented is for vgd attack
             for advStep in range(maxAdvStep):   
              if Targeted:
-                mask = np.ma.masked_where(y_crop==adversary_targeted_class , y_crop) # masking all enhancing to 3 (adv_class)
+                mask = np.ma.masked_where(y_crop==adversary_targeted_class , y_crop) 
                 masked_label=np.ma.filled(mask, fill_value=adv_class)
                 masked_y[test_no_steps*batch_size:(test_no_steps+1)*(batch_size ), :, :] = masked_label
                 y_true_batch =tf.one_hot(masked_label, depth=output_size)
@@ -1064,8 +1064,8 @@ def main_function(n_kernels=32, output_channels = 3, batch_size=20, epochs = 120
         textfile.write("\n std Test Dice Coefficient posterior: "+ str( test_std_d2))   
         
         textfile.write("\n---------------------------------")
-        textfile.write("\n Averaged Test Hausdorff Coefficient Tumor: "+ str( test_h1))
-        textfile.write("\n Averaged Test Hausdorff Coefficient Core: "+ str( test_h2))   
+        textfile.write("\n Averaged Test Hausdorff Coefficient Anterior: "+ str( test_h1))
+        textfile.write("\n Averaged Test Hausdorff Coefficient Posterior: "+ str( test_h2))   
         
         textfile.write("\n---------------------------------")
         textfile.write( "\n"+str( test_d1))
