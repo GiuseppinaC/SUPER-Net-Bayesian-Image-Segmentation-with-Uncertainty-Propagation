@@ -17,7 +17,7 @@ This repository contains the implementation and pretrained models for **SUPER-Ne
 ├── hippocampus.py # Main script for the Hippocampus dataset
 ├── lungs.py # Main script for the Lungs dataset
 
-├── brats_functions.py # Helper functions for BraTS (plots, metrics, preprocessing)
+├── Brats_functions.py # Helper functions for BraTS (plots, metrics, preprocessing)
 ├── hippocampus_functions.py
 ├── lungs_functions.py
 
@@ -40,43 +40,25 @@ pip install -r requirements.txt
 ```
 
 ## Running Models
-By default, you may need to update the data path, results path in each script:
+- **`main()`**  
+  Used for model training. It also supports training adversarial attacks and testing.
 
-In brats.py, modify line XX to point to your BraTS dataset folder.
-
-In hippocampus.py, modify line YY.
-
-In lungs.py, modify line ZZ.
-
-(We will provide comments in each file to indicate where these changes are needed.)
-
-**Training:**
-
-If Training only:
+- **`testing()`**  
+  Used for evaluating the model. Supports both clean (noise-free) evaluation and testing with different levels of noise.
 
 
 ```sh
 python Brats.py 
 ```
 (Similarly for the other datasets: hippocampus.py, lungs.py).
-**Testing - Clean Test Data & Noisy Data:**
+ 
 
-If Testing (with default options):
+**Model Saving**
+By default, the code will automatically create a folder to store trained models:
 
-
-```sh
-python Brats.py (change lines ...)
+```python
+PATH = './Dataset/saved_models_SUPER_u-Net/epoch_{}/'.format(epochs)
+# Modify as needed - Datasets will be Brats, Hippocampus and Lungs
 ```
 
 
-
-**Testing - Adversarial Attacks:**
-
-When Testing with added Gaussian noise, we need to specify the level of noise (variance) :
-
-
-
-When Testing with added Adversarial (FGSM) attacks, we need to specify:
-- the level of the attack (epsilon)
-- if targeted or not (default is untargeted)
-- the fooling class (for targeted attacks)
